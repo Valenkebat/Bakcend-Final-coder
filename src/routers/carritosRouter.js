@@ -1,21 +1,20 @@
 const router = require("express").Router();
 const CarritosController = require("../controllers/carritosController");
 
-module.exports = class CarritosRouter {
-  constructor() {
-    this.carritosController = new CarritosController();
-  }
-  start() {
-    router.get("/", this.carritosController.getCarritos());
 
-    router.get("/:id/productos", this.carritosController.getCarritosById());
+    const carritosController = new CarritosController();
+  
+  
+    router.get("/",carritosController.getCarritos());
 
-    router.post("/", this.carritosController.postCarritos());
+    router.get("/:id/productos", carritosController.getCarritosById());
 
-    router.post("/:id/productos", this.carritosController.postById())
+    router.post("/", carritosController.postCarritos());
 
-    router.delete("/:id", this.carritosController.deleteByIdCarritos());
+    router.post("/:id/productos", carritosController.postById())
 
-    router.delete("/:id/productos/:idProd", this.carritosController.deleteByIdProd())
-  }
-};
+    router.delete("/:id",carritosController.deleteByIdCarritos());
+
+    router.delete("/:id/productos/:idProd", carritosController.deleteByIdProd())
+
+    module.exports = router;
